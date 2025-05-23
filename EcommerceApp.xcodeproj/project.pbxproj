@@ -33,7 +33,7 @@
 		D822C41D2DE0B93E00AB3901 /* Exceptions for "EcommerceApp" folder in "EcommerceApp" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				App/Info.plist,
+				Info.plist,
 			);
 			target = D822C3F42DE0B93D00AB3901 /* EcommerceApp */;
 		};
