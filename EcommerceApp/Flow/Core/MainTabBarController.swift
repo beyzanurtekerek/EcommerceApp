@@ -8,14 +8,13 @@
 import UIKit
 
 class MainTabBarController: UITabBarController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupTabBar()
         configureTabBar()
     }
-
     
     private func setupTabBar() {
         let home = UINavigationController(rootViewController: HomeViewController())
@@ -34,13 +33,13 @@ class MainTabBarController: UITabBarController {
             image: UIImage(systemName: "cart"),
             selectedImage: UIImage(systemName: "cart.fill")
         )
-
+        
         favorites.tabBarItem = UITabBarItem(
             title: "Favorites",
             image: UIImage(systemName: "heart"),
             selectedImage: UIImage(systemName: "heart.fill")
         )
-
+        
         profile.tabBarItem = UITabBarItem(
             title: "Profile",
             image: UIImage(systemName: "person"),
