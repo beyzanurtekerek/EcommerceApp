@@ -7,7 +7,7 @@
 
 import UIKit
 
-public extension UICollectionView {
+public extension UICollectionViewCell {
     static var identifier: String {
         String(describing: type(of: self))
     }
