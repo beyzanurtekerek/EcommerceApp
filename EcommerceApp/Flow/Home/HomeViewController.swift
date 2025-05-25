@@ -11,6 +11,11 @@ import RxCocoa
 
 final class HomeViewController: BaseViewController {
     
+    private let viewModel = HomeViewModel()
+    private var products: [Product] = []
+    private var filteredProducts: [Product] = []
+    private var collectionView: CollectionView<Product, ProductCollectionViewCell>?
+    
     private let searchBar: UISearchBar = {
         let searchBar = UISearchBar()
         searchBar.placeholder = "Search..."
@@ -55,7 +60,6 @@ final class HomeViewController: BaseViewController {
         super.viewDidLoad()
         setupUI()
         applyConstraints()
-        
     }
     
     private func setupUI() {

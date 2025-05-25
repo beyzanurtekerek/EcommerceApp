@@ -35,6 +35,7 @@ protocol NetworkManagerProtocol {
 
 final class NetworkManager: NetworkManagerProtocol {
     
+    static let shared = NetworkManager()
     private let baseURL: String
     
     init(baseURL: String = "https://5fc9346b2af77700165ae514.mockapi.io") {
