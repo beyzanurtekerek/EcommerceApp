@@ -15,7 +15,7 @@ class BaseViewController: UIViewController, LoadingShowable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "E-Market"
+        self.navigationItem.title = "E-Store"
     }
 
     func bindLoadingStatus(to loadingStatus: BehaviorRelay<LoadingStatus>) {
