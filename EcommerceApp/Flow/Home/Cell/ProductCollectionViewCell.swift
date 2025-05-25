@@ -1,0 +1,156 @@
+//
+//  ProductCollectionViewCell.swift
+//  EcommerceApp
+//
+//  Created by Beyza Nur Tekerek on 25.05.2025.
+//
+
+import UIKit
+
+class ProductCollectionViewCell: UICollectionViewCell {
+    
+    private let productImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.backgroundColor = .lightGray
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 8
+        imageView.layer.masksToBounds = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    private let favoriteButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "heart"), for: .normal)
+        button.tintColor = .systemRed
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 14, weight: .medium)
+        label.textColor = .label
+        label.numberOfLines = 2
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let priceLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 14, weight: .medium)
+        label.textColor = .label
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let addToCartButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Add to Cart", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .systemOrange
+        button.layer.cornerRadius = 8
+        button.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private let stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 12
+        stackView.alignment = .fill
+        stackView.backgroundColor = .red
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private let imageContainerView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupUI()
+        applyConstraints()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupUI() {
+        contentView.backgroundColor = .systemBackground
+        contentView.applyShadow()
+        contentView.addSubview(stackView)
+        
+        imageContainerView.addSubview(productImageView)
+        imageContainerView.addSubview(favoriteButton)
+        
+        stackView.addArrangedSubview(imageContainerView)
+        stackView.addArrangedSubview(titleLabel)
+        stackView.addArrangedSubview(priceLabel)
+        stackView.addArrangedSubview(addToCartButton)
+    }
+    
+    private func applyConstraints() {
+        let stackViewConstraints = [
+            stackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+            stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
+            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
+            stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
+        ]
+        let productImageViewConstraints = [
+            productImageView.topAnchor.constraint(equalTo: imageContainerView.topAnchor),
+            productImageView.leadingAnchor.constraint(equalTo: imageContainerView.leadingAnchor),
+            productImageView.trailingAnchor.constraint(equalTo: imageContainerView.trailingAnchor),
+            productImageView.heightAnchor.constraint(equalToConstant: 120)
+        ]
+        let favoriteButtonConstraints = [
+            favoriteButton.topAnchor.constraint(equalTo: imageContainerView.topAnchor, constant: 8),
+            favoriteButton.trailingAnchor.constraint(equalTo: imageContainerView.trailingAnchor, constant: -8),
+            favoriteButton.widthAnchor.constraint(equalToConstant: 24),
+            favoriteButton.heightAnchor.constraint(equalToConstant: 24)
+        ]
+        let titleLabelConstraints = [
+            titleLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 34)
+        ]
+        let priceLabelConstraints = [
+            priceLabel.heightAnchor.constraint(equalToConstant: 20)
+        ]
+        let addToCartButtonConstraints = [
+            addToCartButton.heightAnchor.constraint(equalToConstant: 36)
+        ]
+        
+        let allConstraints = [
+            stackViewConstraints,
+            productImageViewConstraints,
+            favoriteButtonConstraints,
+            titleLabelConstraints,
+            priceLabelConstraints,
+            addToCartButtonConstraints
+        ].flatMap { $0 }
+        
+        NSLayoutConstraint.activate(allConstraints)
+    }
+    
+    private func setupActions() {
+        //
+    }
+    
+    @objc private func favoriteButtonTapped() {
+        //
+    }
+    
+    @objc private func addToCartButtonTapped() {
+        //
+    }
+    
+    func configure() {
+        //
+    }
+    
+}
