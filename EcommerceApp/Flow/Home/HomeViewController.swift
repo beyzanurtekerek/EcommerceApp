@@ -15,7 +15,7 @@ final class HomeViewController: BaseViewController {
         let searchBar = UISearchBar()
         searchBar.placeholder = "Search..."
         searchBar.searchBarStyle = .minimal
-        searchBar.layer.cornerRadius = 6
+        searchBar.layer.cornerRadius = 4
         searchBar.layer.masksToBounds = true
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         return searchBar
@@ -24,20 +24,31 @@ final class HomeViewController: BaseViewController {
     private let filterLabel: UILabel = {
         let label = UILabel()
         label.text = "Filters:"
-        label.font = .systemFont(ofSize: 17, weight: .medium)
+        label.font = .systemFont(ofSize: 18, weight: .medium)
         return label
     }()
     
     private let filterButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Filter", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.backgroundColor = .white
-        button.layer.cornerRadius = 6
+        button.setTitle("Select Filter", for: .normal)
+        button.setTitleColor(.label, for: .normal)
+        button.backgroundColor = .systemGray6
+        button.layer.cornerRadius = 5
         button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.systemGray6.cgColor
+        button.layer.borderColor = UIColor.systemGray5.cgColor
+        button.widthAnchor.constraint(equalToConstant: 120).isActive = true
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
+    }()
+    
+    private lazy var filterStackView: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [filterLabel, filterButton])
+        stack.axis = .horizontal
+        stack.spacing = 8
+        stack.alignment = .center
+        stack.distribution = .fill
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
     }()
     
     override func viewDidLoad() {
@@ -49,20 +60,31 @@ final class HomeViewController: BaseViewController {
     
     private func setupUI() {
         view.backgroundColor = .systemBackground
-        view.addSubview(filterButton)
         view.addSubview(searchBar)
+        view.addSubview(filterStackView)
     }
     
     private func applyConstraints() {
         let searchBarConstraints = [
             searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
-            searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 6),
             searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             searchBar.heightAnchor.constraint(equalToConstant: 40)
         ]
         
+        let filterStackViewConstraints = [
+            filterStackView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 10),
+            filterStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            filterStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            filterStackView.heightAnchor.constraint(equalToConstant: 40)
+        ]
         
-        NSLayoutConstraint.activate(searchBarConstraints)
+        let allConstraints = [
+            searchBarConstraints,
+            filterStackViewConstraints
+        ].flatMap { $0 }
+        
+        NSLayoutConstraint.activate(allConstraints)
     }
     
 }
