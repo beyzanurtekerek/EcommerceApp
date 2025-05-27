@@ -142,3 +142,7 @@ private extension HomeViewController {
         bindLoadingStatus(to: viewModel.loadingStatus)
     }
 }
+
+// extension product delegate eklenecek
+// search bar delegate eklenecek
+//

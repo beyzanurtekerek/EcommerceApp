@@ -8,8 +8,18 @@
 import UIKit
 import Kingfisher
 
+protocol ProductCollectionViewCellDelegate: AnyObject {
+    func didTapFavoriteButton(in cell: ProductCollectionViewCell)
+    func didTapAddToCartButton(in cell: ProductCollectionViewCell)
+}
+
 class ProductCollectionViewCell: UICollectionViewCell {
     
+    // MARK: - Properties
+    weak var delegate: ProductCollectionViewCellDelegate?
+    private var isFavorite: Bool = false
+    
+    // MARK: - UI Components
     private let productImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
@@ -75,16 +85,19 @@ class ProductCollectionViewCell: UICollectionViewCell {
         return view
     }()
     
+    // MARK: - init
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
         applyConstraints()
+        setupActions()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Setup UI
     private func setupUI() {
         contentView.backgroundColor = .systemBackground
         contentView.layer.cornerRadius = 8
@@ -101,6 +114,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
         stackView.addArrangedSubview(addToCartButton)
     }
     
+    // MARK: - Constraints
     private func applyConstraints() {
         let stackViewConstraints = [
             stackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
@@ -142,24 +156,40 @@ class ProductCollectionViewCell: UICollectionViewCell {
         NSLayoutConstraint.activate(allConstraints)
     }
     
+    // MARK: - Actions & Actions Setup
     private func setupActions() {
-        //
+        favoriteButton.addTarget(self, action: #selector(favoriteButtonTapped), for: .touchUpInside)
+        addToCartButton.addTarget(self, action: #selector(addToCartButtonTapped), for: .touchUpInside)
     }
     
     @objc private func favoriteButtonTapped() {
-        //
+        isFavorite.toggle()
+        
+        let imageName = isFavorite ? "heart.fill" : "heart"
+        let tintColor = isFavorite ? UIColor.systemRed : UIColor.systemGray
+        
+        favoriteButton.setImage(UIImage(systemName: imageName), for: .normal)
+        favoriteButton.tintColor = tintColor
+        
+        delegate?.didTapFavoriteButton(in: self)
     }
     
     @objc private func addToCartButtonTapped() {
-        //
+        delegate?.didTapAddToCartButton(in: self)
     }
     
+    // MAR: - Configure Cell
     func configure(with product: Product) {
         productImageView.kf.setImage(with: URL(string: product.thumbnail ?? ""), placeholder: UIImage(named: "placeholder"))
         productImageView.contentMode = .scaleAspectFill
         priceLabel.text = "$\(product.price ?? 0)"
         titleLabel.text = product.title
-        // favorite islemleri yapılacak
+        
+        isFavorite = product.isFavorite ?? false
+        let imageName = isFavorite ? "heart.fill" : "heart"
+        let tintColor = isFavorite ? UIColor.systemRed : UIColor.systemGray
+        favoriteButton.setImage(UIImage(systemName: imageName), for: .normal)
+        favoriteButton.tintColor = tintColor
     }
     
 }
