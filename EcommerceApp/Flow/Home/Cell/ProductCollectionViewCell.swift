@@ -52,7 +52,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
         let button = UIButton()
         button.setTitle("Add to Cart", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .systemOrange
+        button.backgroundColor = .systemOrange.withAlphaComponent(0.9)
         button.layer.cornerRadius = 8
         button.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
         button.translatesAutoresizingMaskIntoConstraints = false
