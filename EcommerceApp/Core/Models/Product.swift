@@ -12,6 +12,7 @@ struct ProductResponse: Decodable {
 }
 
 struct Product: Decodable {
+    let id: Int
     let title: String?
     let description: String?
     let category: String?
@@ -40,7 +41,7 @@ struct Dimensions: Decodable {
 struct Review: Decodable {
     let rating: Int?
     let comment: String?
-    let date: Date?
+    let date: String? // simdilik string
     let reviewerName: String?
     let reviewerEmail: String?
 }
