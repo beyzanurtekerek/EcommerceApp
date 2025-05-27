@@ -53,12 +53,19 @@ class CollectionView<T, Cell: UICollectionViewCell>: UIView, UICollectionViewDel
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(cellClass, forCellWithReuseIdentifier: cellIdentifier)
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = .systemBackground
     }
     
     private func setupUI() {
         addSubview(collectionView)
         // constraint ver collection viewa
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: topAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
     }
     
     // MARK: - Public Methods

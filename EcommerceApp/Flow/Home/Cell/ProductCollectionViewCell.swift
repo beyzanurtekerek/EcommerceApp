@@ -6,16 +6,19 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ProductCollectionViewCell: UICollectionViewCell {
     
     private let productImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.backgroundColor = .lightGray
+        imageView.backgroundColor = .white
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 8
         imageView.layer.masksToBounds = true
+        imageView.layer.borderWidth = 0.5
+        imageView.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.3).cgColor
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -30,7 +33,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14, weight: .medium)
+        label.font = .systemFont(ofSize: 15, weight: .medium)
         label.textColor = .label
         label.numberOfLines = 2
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -61,7 +64,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
         stackView.axis = .vertical
         stackView.spacing = 12
         stackView.alignment = .fill
-        stackView.backgroundColor = .red
+        stackView.backgroundColor = .systemBackground
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -84,6 +87,8 @@ class ProductCollectionViewCell: UICollectionViewCell {
     
     private func setupUI() {
         contentView.backgroundColor = .systemBackground
+        contentView.layer.cornerRadius = 8
+        contentView.layer.masksToBounds = true
         contentView.applyShadow()
         contentView.addSubview(stackView)
         
@@ -107,7 +112,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
             productImageView.topAnchor.constraint(equalTo: imageContainerView.topAnchor),
             productImageView.leadingAnchor.constraint(equalTo: imageContainerView.leadingAnchor),
             productImageView.trailingAnchor.constraint(equalTo: imageContainerView.trailingAnchor),
-            productImageView.heightAnchor.constraint(equalToConstant: 120)
+            productImageView.heightAnchor.constraint(equalToConstant: 160)
         ]
         let favoriteButtonConstraints = [
             favoriteButton.topAnchor.constraint(equalTo: imageContainerView.topAnchor, constant: 8),
@@ -149,8 +154,12 @@ class ProductCollectionViewCell: UICollectionViewCell {
         //
     }
     
-    func configure() {
-        //
+    func configure(with product: Product) {
+        productImageView.kf.setImage(with: URL(string: product.thumbnail ?? ""), placeholder: UIImage(named: "placeholder"))
+        productImageView.contentMode = .scaleAspectFill
+        priceLabel.text = "$\(product.price ?? 0)"
+        titleLabel.text = product.title
+        // favorite islemleri yapılacak
     }
     
 }

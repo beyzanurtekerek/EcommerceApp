@@ -60,12 +60,33 @@ final class HomeViewController: BaseViewController {
         super.viewDidLoad()
         setupUI()
         applyConstraints()
+        bind()
     }
     
     private func setupUI() {
         view.backgroundColor = .systemBackground
         view.addSubview(searchBar)
         view.addSubview(filterStackView)
+        
+        collectionView = CollectionView<Product, ProductCollectionViewCell>(
+            cellClass: ProductCollectionViewCell.self,
+            itemSize: CGSize(width: (view.frame.width - 48) / 2, height: 300),
+            configureCell: { cell, product in
+                cell.configure(with: product)
+            }
+        )
+        
+        if let collectionView = collectionView {
+            collectionView.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview(collectionView)
+            NSLayoutConstraint.activate([
+                collectionView.topAnchor.constraint(equalTo: filterStackView.bottomAnchor),
+                collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            ])
+        }
+
     }
     
     private func applyConstraints() {
@@ -91,4 +112,28 @@ final class HomeViewController: BaseViewController {
         NSLayoutConstraint.activate(allConstraints)
     }
     
+}
+
+private extension HomeViewController {
+    func bind() {
+        bindProducts()
+    }
+    
+    func bindProducts() {
+        viewModel.filteredProducts
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] products in
+                guard let self else { return }
+                if let products = products {
+                    collectionView?.isHidden = false
+                    // errorview
+                    collectionView?.updateItems(products)
+                } else {
+                    collectionView?.isHidden = false
+                    // errorview
+                }
+            })
+            .disposed(by: disposeBag)
+        bindLoadingStatus(to: viewModel.loadingStatus)
+    }
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D881AC492DE601EB009517E6 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = D881AC482DE601EB009517E6 /* Kingfisher */; };
 		D8F135932DE365DC0082F2CC /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = D8F135922DE365DC0082F2CC /* RxCocoa */; };
 		D8F135952DE365DC0082F2CC /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = D8F135942DE365DC0082F2CC /* RxRelay */; };
 		D8F135972DE365DC0082F2CC /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D8F135962DE365DC0082F2CC /* RxSwift */; };
@@ -85,6 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D881AC492DE601EB009517E6 /* Kingfisher in Frameworks */,
 				D8F135972DE365DC0082F2CC /* RxSwift in Frameworks */,
 				D8F135952DE365DC0082F2CC /* RxRelay in Frameworks */,
 				D8F135932DE365DC0082F2CC /* RxCocoa in Frameworks */,
@@ -145,6 +147,7 @@
 				D8F135922DE365DC0082F2CC /* RxCocoa */,
 				D8F135942DE365DC0082F2CC /* RxRelay */,
 				D8F135962DE365DC0082F2CC /* RxSwift */,
+				D881AC482DE601EB009517E6 /* Kingfisher */,
 			);
 			productName = EcommerceApp;
 			productReference = D822C3F52DE0B93D00AB3901 /* EcommerceApp.app */;
@@ -230,6 +233,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				D8F135912DE365DC0082F2CC /* XCRemoteSwiftPackageReference "RxSwift" */,
+				D881AC472DE601EB009517E6 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = D822C3F62DE0B93D00AB3901 /* Products */;
@@ -594,6 +598,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		D881AC472DE601EB009517E6 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.3.2;
+			};
+		};
 		D8F135912DE365DC0082F2CC /* XCRemoteSwiftPackageReference "RxSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
@@ -605,6 +617,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		D881AC482DE601EB009517E6 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D881AC472DE601EB009517E6 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
 		D8F135922DE365DC0082F2CC /* RxCocoa */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D8F135912DE365DC0082F2CC /* XCRemoteSwiftPackageReference "RxSwift" */;
