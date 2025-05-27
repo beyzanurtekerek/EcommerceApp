@@ -30,6 +30,7 @@ struct Product: Decodable {
     let returnPolicy: String?
     let images: [String]?
     let thumbnail: String?
+    var isFavorite: Bool?
 }
 
 struct Dimensions: Decodable {
