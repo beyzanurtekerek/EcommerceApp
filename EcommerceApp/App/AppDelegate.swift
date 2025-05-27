@@ -19,7 +19,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func setupNavBarAppearance() {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = .systemOrange
+        let gradientImage = UIImage.gradientImage(
+            bounds: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 1),
+            colors: [
+                UIColor.systemOrange.withAlphaComponent(0.9),
+                UIColor.systemOrange.withAlphaComponent(0.7),
+                UIColor.systemOrange.withAlphaComponent(0.9)
+            ]
+        )
+        appearance.backgroundImage = gradientImage
         appearance.titleTextAttributes = [
             .foregroundColor: UIColor.white,
             .font: UIFont.systemFont(ofSize: 30, weight: .bold)
@@ -47,4 +55,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 }
-
