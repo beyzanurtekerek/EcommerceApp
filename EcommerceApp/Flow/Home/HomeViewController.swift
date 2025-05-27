@@ -15,6 +15,7 @@ final class HomeViewController: BaseViewController {
     private var products: [Product] = []
     private var filteredProducts: [Product] = []
     private var collectionView: CollectionView<Product, ProductCollectionViewCell>?
+    var errorView: ErrorView = ErrorView()
     
     private let searchBar: UISearchBar = {
         let searchBar = UISearchBar()
@@ -67,6 +68,11 @@ final class HomeViewController: BaseViewController {
         view.backgroundColor = .systemBackground
         view.addSubview(searchBar)
         view.addSubview(filterStackView)
+        view.addSubview(errorView)
+        
+        errorView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
+        errorView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 0).isActive = true
+
         
         collectionView = CollectionView<Product, ProductCollectionViewCell>(
             cellClass: ProductCollectionViewCell.self,
@@ -86,7 +92,6 @@ final class HomeViewController: BaseViewController {
                 collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
             ])
         }
-
     }
     
     private func applyConstraints() {
@@ -126,11 +131,11 @@ private extension HomeViewController {
                 guard let self else { return }
                 if let products = products {
                     collectionView?.isHidden = false
-                    // errorview
+                    errorView.isHidden = true
                     collectionView?.updateItems(products)
                 } else {
                     collectionView?.isHidden = false
-                    // errorview
+                    errorView.isHidden = false
                 }
             })
             .disposed(by: disposeBag)
